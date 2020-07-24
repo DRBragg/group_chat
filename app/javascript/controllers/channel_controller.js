@@ -1,0 +1,37 @@
+import { Controller } from 'stimulus'
+import consumer from 'channels/consumer'
+
+export default class extends Controller {
+  static targets = ['messages', 'newMessage']
+
+  connect() {
+    this.subscription = consumer.subscriptions.create(
+      { channel: 'MessageChannel', id: this.data.get('id') },
+      {
+        connected: this._connected.bind(this),
+        disconnected: this._disconnected.bind(this),
+        received: this._received.bind(this),
+      }
+    )
+  }
+
+  _connected() {}
+
+  _disconnected() {
+    consumer.subscriptions.remove(this.subscription)
+  }
+
+  _received(data) {
+    if (data.message) {
+      this.messagesTarget.insertAdjacentHTML('beforeend', data.message)
+
+      if (!document.hidden) {
+        this.subscription.perform('mark_as_read')
+      }
+    }
+  }
+
+  clearMessage(event) {
+    this.newMessageTarget.value = ''
+  }
+}
