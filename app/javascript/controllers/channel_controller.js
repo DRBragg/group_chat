@@ -15,11 +15,13 @@ export default class extends Controller {
     )
   }
 
-  _connected() {}
-
-  _disconnected() {
+  disconnect() {
     consumer.subscriptions.remove(this.subscription)
   }
+
+  _connected() {}
+
+  _disconnected() {}
 
   _received(data) {
     if (data.message) {
