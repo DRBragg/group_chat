@@ -19,13 +19,16 @@ export default class extends Controller {
     consumer.subscriptions.remove(this.subscription)
   }
 
-  _connected() {}
+  _connected() {
+    this.scrollToBottom()
+  }
 
   _disconnected() {}
 
   _received(data) {
     if (data.message) {
       this.messagesTarget.insertAdjacentHTML('beforeend', data.message)
+      this.scrollToBottom()
 
       if (!document.hidden) {
         this.subscription.perform('mark_as_read')
@@ -35,5 +38,9 @@ export default class extends Controller {
 
   clearMessage(event) {
     this.newMessageTarget.value = ''
+  }
+
+  scrollToBottom() {
+    window.scrollTo(0, document.body.scrollHeight)
   }
 }
