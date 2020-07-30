@@ -18,9 +18,16 @@
   <div class="d-flex justify-content-between">
     <h6>Users</h6>
   </div>
+  <ul class="list-group list-group-flush" data-controller="online">
   <% @channel.users.each do |user| %>
-    <div>
+    <%= tag.li data: { target: 'online.users', user_id: user.id }, class: ["list-group-item d-flex align-items-center small"] do %>
+      <% if user.online? %>
+        <%= icon('fas', 'circle', class: 'pr-2 text-success') %>
+      <% else%>
+        <%= icon('far', 'circle', class: 'pr-2 text-muted') %>
+      <% end %>
       <%= user.name %>
-    </div>
+    <% end %>
   <% end %>
+  </ul>
 </div>
