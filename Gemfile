@@ -51,7 +51,7 @@ gem 'bootstrap', '~> 4.5'
 gem 'data-confirm-modal', '~> 1.6', '>= 1.6.2'
 gem 'devise', '~> 4.7', '>= 4.7.0'
 gem 'devise-bootstrapped', github: 'excid3/devise-bootstrapped', branch: 'bootstrap4'
-gem 'devise_masquerade', '~> 1.2'
+gem 'devise_masquerade', '~> 1.3'
 gem 'font-awesome-sass', '~> 5.13'
 gem 'friendly_id', '~> 5.3'
 gem 'guard', '>= 2.2.2', require: false
